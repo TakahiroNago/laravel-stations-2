@@ -16,6 +16,7 @@ class CreatePracticesTable extends Migration
         Schema::create('practices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text('title')->comment('タイトル');
         });
     }
 
