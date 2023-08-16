@@ -12,4 +12,10 @@ class MovieController extends Controller
         $movies = Movie::all();
         return view('movie.index', ['movies' => $movies]);
     }
+
+    public function admin()
+    {
+        $movies = Movie::all();
+        return view('movie.admin', ['movies' => $movies]);
+    }
 }
