@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use App\Rules\FiveMinDifference;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::defaultView('layouts.pagination.paginator');
+        $this->app['validator']->extend('five_min_difference', function ($attribute, $value, $parameters, $validator) {
+            $otherValue = $validator->getData()[$parameters[0]];
+            $rule = new FiveMinDifference($otherValue);
+            return $rule->passes($attribute, $value);
+        });
     }
 }

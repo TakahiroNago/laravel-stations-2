@@ -26,9 +26,9 @@
         </thead>
         <tbody>
             @foreach ($movies as $movie)
-                <tr class="movie-box">
+                <tr>
                     <td>{{ $movie->id }} </td>
-                    <td>{{ $movie->title }} </td>
+                    <td><a href="{{route('admin.show', $movie->id)}}">{{ $movie->title }}</a>  </td>
                     <td>{{ $movie->image_url }} </td>
                     <td>{{ $movie->published_year }} </td>
                     <td>{{ $movie->genre->name }} {{ $movie->genre_id }} </td>
@@ -43,15 +43,12 @@
                     <td>{{ $movie->created_at }} </td>
                     <td>{{ $movie->updated_at }} </td>
                     <td><a href="{{ route('admin.edit', $movie->id) }}"><button>編集</button></a></td>
-                    <td><button class="del-btn">削除</button></td>
-                    <td class="del-content" style="display: none">
-                        <form action="{{route('admin.destroy', $movie->id)}}" method="post">
+                    <td>
+                        <form action="{{route('admin.destroy', $movie->id)}}" method="post" onclick="return confirm('削除しますか?')">
                             @csrf
                             @method('delete')
-                            本当に「{{$movie->title}}」を削除しますか？
-                            <button type="submit">はい</button>
+                            <button>削除</button>
                         </form>
-                        <button class="can-btn">キャンセル</button>
                     </td>
                 </tr>
             @endforeach
@@ -65,17 +62,5 @@
             {{ session('flash_message') }}
         </div>
     @endif
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $('.del-btn').on('click', function() {
-            $(this).parents('.movie-box').find('.del-content').toggle();
-        });
-        $('.can-btn').on('click', function() {
-            $(this).parents('.movie-box').find('.del-content').toggle();
-        });
-    </script>
 </body>
 </html>

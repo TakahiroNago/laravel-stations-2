@@ -28,9 +28,9 @@ class DatabaseSeeder extends Seeder
             DB::table('genres')->insert($seed);
         }
 
-        Movie::factory(10)->create();
+        // Movie::factory(8)->create();
 
-        Schedule::factory(5)->create();
+        Schedule::factory(30)->create();
 
         $seeds = [
             ['id' => 1, 'column' => 1, 'row' => 'a'],

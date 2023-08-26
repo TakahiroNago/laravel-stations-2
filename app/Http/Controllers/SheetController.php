@@ -11,6 +11,6 @@ class SheetController extends Controller
     {
         $sheets = Sheet::all();
 
-        return view('sheet.index', ['sheets' => $sheets]);
+        return view('user.sheet.index', ['sheets' => $sheets]);
     }
 }
